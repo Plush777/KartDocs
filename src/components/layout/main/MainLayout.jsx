@@ -28,8 +28,8 @@ export default function MainLayout() {
 				queryKey: ['newsLists'],
 				queryFn: async () => {
 					const news = await fetchNews();
-					const devArticles = await fetchArticles('http://localhost:8000/api/article/dev');
-					const updateArticles = await fetchArticles('http://localhost:8000/api/article/update');
+					const devArticles = await fetchArticles('https://kartrider-tips-api.fly.dev/api/article/dev');
+					const updateArticles = await fetchArticles('https://kartrider-tips-api.fly.dev/api/article/update');
 
 					return {
 						news,
