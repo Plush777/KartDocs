@@ -1,50 +1,81 @@
-import * as G from "style/components/sub/encyclopedia/Grid.style";
-import * as Collap from "style/components/sub/encyclopedia/Collapse.style";
-import { statArray } from "data/karts";
-import Graph from "components/encyclopedia/Graph";
-import React, { Fragment } from "react";
-import { acquisitionCondition } from "data/acquisition";
+import * as G from 'style/components/sub/encyclopedia/Grid.style';
+import * as Collap from 'style/components/sub/encyclopedia/Collapse.style';
+import { statArray } from 'data/karts';
+import Graph from 'components/encyclopedia/Graph';
+import React, { Fragment } from 'react';
+import { acquisitionCondition } from 'data/acquisition';
 
-export default function GridCollapse({ kartItem, kartItemIndex, collapseRef }) {
+export default function GridCollapse({ item, index, collapseRef }) {
+	const convertTuningToArray = tuningValue => {
+		// 문자열로 변환 후 각 숫자를 배열로 만듦
+		return String(tuningValue).split('').map(Number);
+	};
 
-    const acqArray = acquisitionCondition(kartItem.name);
+	// 데이터 객체를 변환하는 함수
+	const transformKartData = () => {
+		return {
+			array: convertTuningToArray(item.기본튜닝수치),
+		};
+	};
 
-    return (
-        <Collap.Wrap ref={(el) => collapseRef.current[kartItemIndex] = el}>
-            <Collap.List> 
-                <Collap.Item className="first"> 
-                    <Collap.Row flexDirection="column" rowGap="5px">
-                        <G.Text as="span">획득경로</G.Text>
-                        {acqArray.map((acqItem, acqIndex) => {
-                            return (    
-                                <G.Text fontSize=".875rem" as="span" key={acqIndex}>{acqItem}</G.Text>
-                            )
-                        })}
-                    </Collap.Row>
-                </Collap.Item>
+	const statArrayData = transformKartData();
+	const tuningLabels = ['부스터 가속', '드리프트 가속', '부스터 시간', '부스터 충전량'];
 
-                {kartItem.stat && kartItem.stat.array.map((stat, statIndex) => {
-                    return (
-                        <Collap.Item key={statIndex}> 
-                            <Collap.Row rowGap="5px" flexDirection="column" columnGap="20px">
-                                <Collap.Row columnGap="10px">
-                                    <G.Text fontSize=".875rem">{statArray[statIndex]}</G.Text>
-                                    <G.Text as="span" color="var(--active)" fontSize=".875rem" fontWeight="600">{stat}</G.Text>
-                                </Collap.Row>
-                                <Collap.Row columnGap="5px">
-                                    {Array.from({ length: stat }, (_, index) => {
-                                        return (
-                                            <Fragment key={index}>
-                                                <Graph/>
-                                            </Fragment>
-                                        )
-                                    })}
-                                </Collap.Row>
-                            </Collap.Row>
-                        </Collap.Item>
-                    )
-                })}
-            </Collap.List>
-        </Collap.Wrap>
-    )
+	console.log(statArrayData);
+
+	console.log(item);
+
+	return (
+		<Collap.Wrap ref={el => (collapseRef.current[index] = el)}>
+			<Collap.List>
+				<Collap.Item>
+					<Collap.Row flexDirection="column">
+						<Collap.Row flexDirection="row">
+							<G.Text>획득경로</G.Text>
+							<G.Text sm as="span">
+								{item.획득경로}
+							</G.Text>
+						</Collap.Row>
+						{!item.기본튜닝수치 && (
+							<>
+								<Collap.Row flexDirection="row">
+									<G.Text>스킬 및 카트</G.Text>
+									<G.Text sm as="span">
+										{item.좋아하는스킬및카트}
+									</G.Text>
+								</Collap.Row>
+								<Collap.Row flexDirection="row">
+									<G.Text>특성</G.Text>
+									<G.Text sm as="span">
+										{item.특성}
+									</G.Text>
+								</Collap.Row>
+							</>
+						)}
+					</Collap.Row>
+				</Collap.Item>
+
+				{item.기본튜닝수치 && (
+					<Collap.Item>
+						<Collap.RowContainer flexDirection="column">
+							{statArrayData.array.map((value, idx) => (
+								<Collap.Row stat key={idx} flexDirection="column">
+									<G.Text>
+										{tuningLabels[idx]} {value}
+									</G.Text>
+									<Collap.Row graph>
+										{Array.from({ length: value }, (_, graphIndex) => (
+											<Fragment key={graphIndex}>
+												<Graph />
+											</Fragment>
+										))}
+									</Collap.Row>
+								</Collap.Row>
+							))}
+						</Collap.RowContainer>
+					</Collap.Item>
+				)}
+			</Collap.List>
+		</Collap.Wrap>
+	);
 }

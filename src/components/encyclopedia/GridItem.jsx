@@ -1,71 +1,62 @@
-import * as G from "style/components/sub/encyclopedia/Grid.style";
-import Image from "next/image";
-import { backgroundCondition } from "data/karts";
+import * as G from 'style/components/sub/encyclopedia/Grid.style';
+import Image from 'next/image';
+import { backgroundCondition, kartImageSrcCondition, characterImageSrcCondition } from 'data/karts';
 import SCMinus from 'svg/ico-collapse-minus.svg';
 import SCPlus from 'svg/ico-collapse-plus.svg';
-import NoImage from "components/layout/common/NoImage";
-import useImageLoad from "hooks/useImageLoad";
-import { publicImageSrc } from "const";
+import NoImage from 'components/sub/grid/NoImage';
+import useImageLoad from 'hooks/useImageLoad';
+import { publicImageSrc } from 'const';
 
-export default function GridItem({ 
-    kartItem, 
-    toggle, 
-    uniqueIndex, 
-    toggleArray, 
-    setToggleArray, 
-    collapseRef 
-}) {
+export default function GridItem({ item, toggle, onToggle }) {
+	const { imageErrorMap, handleImageError } = useImageLoad();
+	const itemName = item.아이템명;
+	const itemNameResult = itemName.includes('A2')
+		? itemName.replace('A2', '').replace(/\s/g, '')
+		: itemName.replace(/\s/g, '');
 
-    const { loaded, imageError, handleImageError, loadingComplete } = useImageLoad();
+	const getImageSrc = () => {
+		try {
+			return item.엔진
+				? kartImageSrcCondition(item.엔진, itemNameResult)
+				: characterImageSrcCondition(item.아이템명, itemNameResult);
+		} catch (error) {
+			return null;
+		}
+	};
 
-    const handleToggle = (index) => {
-        const updatedArray = [...toggleArray];
-        updatedArray[index] = !updatedArray[index];
-        setToggleArray(updatedArray);
+	return (
+		<G.InnerItem>
+			<G.ImgDiv>
+				{item?.타입 && <G.Tag className={`gridTag ${backgroundCondition(item.타입)}`}>{item.타입}</G.Tag>}
 
-        if (updatedArray[index]) {
-            /* setTimeout으로 비동기처리 */
-            setTimeout(() => {
-                if (collapseRef.current[index]) {
-                    collapseRef.current[index].scrollIntoView({ behavior: "smooth", block: "center"});
-                }
-            }, 1);
-        }
-    }
+				{!imageErrorMap[itemName] && getImageSrc() ? (
+					<Image
+						className="gridImage"
+						onError={() => handleImageError(itemName)}
+						src={getImageSrc()}
+						priority
+						width={240}
+						height={200}
+						alt={item?.아이템명 || '아이템 이미지'}
+					/>
+				) : (
+					<NoImage width={86} height={80} src={publicImageSrc.noImage.kris} />
+				)}
+			</G.ImgDiv>
 
-    return (
-        <G.InnerItem className={`${loaded || imageError ? 'loaded' : ''}`}>
-            {kartItem.img && !imageError ? 
-                 <G.ImgDiv>
-                    {kartItem.type && <G.Tag className={`gridTag ${backgroundCondition(kartItem.type)}`}>{kartItem.type}</G.Tag>}
-                    <Image 
-                        className="gridImage"
-                        onLoadingComplete={loadingComplete}
-                        onError={handleImageError}
-                        src={kartItem.stat ? kartItem.img : `${kartItem.img}.webp`} 
-                        width={240} 
-                        height={200} 
-                        alt={kartItem.name}
-                    />
-                </G.ImgDiv>
-                :
-                <NoImage width={86} height={80} src={publicImageSrc.noImage.kris}/>
-            }
+			<G.Box>
+				<G.InnerBox>
+					<G.Button className="gridButton" type="button" onClick={onToggle}>
+						<G.Text>{item.아이템명}</G.Text>
 
-            <G.Box>
-                <G.InnerBox>
-                    <G.Button className="gridButton" type="button" onClick={() => handleToggle(uniqueIndex)}>
-                        <G.Text>{kartItem.name}</G.Text>
-
-                        {
-                            toggle ? 
-                            <SCMinus width="16px" height="16px" stroke="var(--title)" /> 
-                            : 
-                            <SCPlus width="16px" height="16px" stroke="var(--title)" />
-                        }
-                    </G.Button>
-                </G.InnerBox>
-            </G.Box>
-        </G.InnerItem>
-    )
+						{toggle ? (
+							<SCMinus width="16px" height="16px" stroke="var(--title)" />
+						) : (
+							<SCPlus width="16px" height="16px" stroke="var(--title)" />
+						)}
+					</G.Button>
+				</G.InnerBox>
+			</G.Box>
+		</G.InnerItem>
+	);
 }

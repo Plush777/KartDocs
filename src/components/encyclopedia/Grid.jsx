@@ -1,68 +1,62 @@
-import * as G from "style/components/sub/encyclopedia/Grid.style";
-import { useState, useEffect, useRef } from "react";
-import GridItem from "components/encyclopedia/GridItem";
-import GridCollapse from "components/encyclopedia/GridCollapse";
-import { filterDataByGrade } from "data/sidebar";
+import * as G from 'style/components/sub/encyclopedia/Grid.style';
+import { useState, useEffect, useRef } from 'react';
+import GridItem from 'components/encyclopedia/GridItem';
+import GridCollapse from 'components/encyclopedia/GridCollapse';
 
-export default function Grid({ data, commonProps }) {
-    const [dataState, setDataState] = useState(undefined);
-    const [toggleArray, setToggleArray] = useState([]);
-    const collapseRef = useRef([]);
+export default function Grid({ data }) {
+	const [toggleArray, setToggleArray] = useState([]);
+	const collapseRef = useRef([]);
 
-    let karts = filterDataByGrade(commonProps.kartGradeData, data);
+	// console.log(data);
 
-    useEffect(() => {
-        if (data) {
-            setDataState(karts);
-            const initArray = Array.from({ length: karts.length }, () => false);
-            setToggleArray(initArray);
-        }
+	// 토글 배열 초기화
+	useEffect(() => {
+		if (data) {
+			const newToggleArray = Array.from({ length: data.length }, () => false);
+			setToggleArray(newToggleArray);
+		}
+	}, [data?.length]);
 
-        if (data && commonProps.value.length > 0) {
-            setDataState(data);
-        }
+	const handleToggle = index => {
+		const updatedArray = toggleArray.map((_, i) => {
+			if (i === index) {
+				// 클릭된 항목만 토글
+				return !toggleArray[i];
+			}
+			// 나머지 항목은 현재 상태 유지
+			return toggleArray[i];
+		});
 
-        if (data && commonProps.value.length > 0 && commonProps.clicked?.includes(true)) {
-            commonProps.setValue('');
-            commonProps.setClicked([false, false, false, false, false]);
-            setDataState(karts);
-        }
-    }, [data, commonProps.tabIndex, commonProps.kartGradeData, commonProps.value]);
+		setToggleArray(updatedArray);
 
-    return (
-        <G.Wrap>
-             <G.List>
-                {dataState?.map((kart, kartIndex) => {
-                    return kart?.map((kartItem, kartItemIndex) => {
-                        const uniqueIndex = kartIndex * 100 + kartItemIndex;
-                        const toggle = toggleArray[uniqueIndex];
+		// 열리는 경우에만 스크롤
+		if (updatedArray[index]) {
+			setTimeout(() => {
+				if (collapseRef.current[index]) {
+					collapseRef.current[index].scrollIntoView({
+						behavior: 'smooth',
+						block: 'center',
+					});
+				}
+			}, 1);
+		}
+	};
 
-                        return (
-                            <G.Item key={uniqueIndex}>
-                                <GridItem
-                                    kartItem={kartItem}
-                                    toggle={toggle}
-                                    uniqueIndex={uniqueIndex}
-                                    toggleArray={toggleArray}
-                                    setToggleArray={setToggleArray}
-                                    collapseRef={collapseRef}
-                                />
+	return (
+		<G.Wrap>
+			<G.List>
+				{data?.map((item, index) => {
+					const toggle = toggleArray[index];
 
-                                {
-                                    toggle && 
+					return (
+						<G.Item key={item.아이템명}>
+							<GridItem item={item} toggle={toggle} onToggle={() => handleToggle(index)} />
 
-                                    <GridCollapse 
-                                        kartItem={kartItem} 
-                                        kartItemIndex={uniqueIndex} 
-                                        collapseRef={collapseRef}
-                                    />
-                                }
-                                
-                            </G.Item>
-                        )
-                    })
-                })}
-            </G.List>
-        </G.Wrap>
-    )
+							{toggle && <GridCollapse item={item} index={index} collapseRef={collapseRef} />}
+						</G.Item>
+					);
+				})}
+			</G.List>
+		</G.Wrap>
+	);
 }

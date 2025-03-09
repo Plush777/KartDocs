@@ -1,5 +1,5 @@
-export default function BeforeThemeRender(){
-    const script = `
+export default function BeforeThemeRender() {
+  const script = `
         document.body.dataset.theme = window.localStorage.getItem("theme") || 'light';
 
         if (document.body.dataset.theme === 'dark') {
@@ -7,7 +7,7 @@ export default function BeforeThemeRender(){
         } else if (document.body.dataset.theme === 'light') {
             document.body.style.backgroundColor = '#ffffff';
         }
-    `
+    `;
 
-    return <script dangerouslySetInnerHTML={{ __html: script }} />
+  return <script dangerouslySetInnerHTML={{ __html: script }} />;
 }

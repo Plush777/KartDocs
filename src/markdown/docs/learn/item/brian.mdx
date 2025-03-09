@@ -3,15 +3,19 @@ title: 브라이언
 date: 2024-06-12
 ---
 
+<Division className="mdRatio">
+	<Video fileName="skill/skill-brian.mp4" />
+</Division>
+
 <Sprite className="character" backgroundPosition="-597px -378px">브라이언</Sprite>
 
 <Bq>브라이언이 신고를 받고 강화 사이렌을 지닌 상태로 출동합니다. <br/>
 빠른 출동과 단속을 위해 사이렌 획득 시 속도가 상승된 강화 사이렌으로 변경되고 바리케이드를 함께 획득합니다. <br/>
-브라이언은 일정 시간마다 사이렌을 획득합니다.</Bq>
+브라이언은 일정 시간마다 사이렌을 획득합니다.<br/><br/>OVERDRIVE 패치 이후로 브라이언의 스킬이 **KDI 경찰 트럭** 카트바디로 이식되었습니다.</Bq>
 
 아이리와 동일하게 처음부터 특수 아이템을 가지고 시작하며, 
 
-사이렌 속도가 빠르기 때문에 미들 순위에서 스위핑이 가능하고 바리케이드로 1등 견제가 가능합니다. 
+사이렌 속도가 빠르기 때문에 (일반 사이렌에 비해 20km/h 정도 더 빠름) 미들 순위에서 스위핑이 가능하고 바리케이드로 1등 견제가 가능합니다. 
 
 <br/>
 
@@ -32,15 +36,22 @@ date: 2024-06-12
 
 <Bq>게임 시작 시 강화 사이렌 보유 <br/>
 사이렌 획득 시 강화 사이렌으로 변경 및 바리케이드 획득<br/>
-일정 시간마다 사이렌 획득</Bq>
+일정 시간마다 사이렌 획득<br/><br/>강화 사이렌 속도 증가량 58%<br/>사이렌 재획득 대기시간 44초</Bq>
 
-<TagList title="재획득 대기시간 및 강화 사이렌 가속력">
+{/* <TagList title="재획득 대기시간 및 강화 사이렌 가속력">
     <Tag name="일반" text1="44초 / 58%"/>
     <Tag name="고급" text1="42초 / 60%"/>
     <Tag name="희귀" text1="40초 / 62%"/>
     <Tag name="영웅" text1="38초 / 64%"/>
     <Tag name="전설" text1="36초 / 66%"/>
-</TagList>
+</TagList> */}
+
+### 카트바디
+
+<Img className="dynamicImage" src="/images/karts/KDI경찰트럭.webp" alt="KDI 경찰트럭"/>
+
+스킬을 사용하려면, KDI 경찰트럭 카트바디를 장착해야합니다.
+
 
 ### 방어 가능한 아이템
 
@@ -52,5 +63,5 @@ date: 2024-06-12
 ### 카운터
 
 <Division className="mdFlex mdCg">
-    <Tag name="크리스" styleClassName="radius"/>
+    <Tag name="뉴욕머슬카 (기존 크리스 캐릭터)" styleClassName="radius"/>
 </Division>

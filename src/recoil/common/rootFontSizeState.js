@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const rootFontSizeAtom = atom({
-    key: 'rootFontSize',
-    default: localStorage.getItem('fontSize') || 'default'
+  key: 'rootFontSize',
+  default: 'default',
 });

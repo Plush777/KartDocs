@@ -3,10 +3,15 @@ title: 네오
 date: 2024-06-12
 ---
 
+<Division className="mdRatio">
+	<Video fileName="skill/skill-neo.mp4" />
+</Division>
+
 <Sprite className="character" backgroundPosition="-1107px -1374px">네오</Sprite>
 
 <Bq>네오가 광선검을 휘둘러 자신을 중심으로 원형의 파동을 만들어 냅니다. <br/>
-파동에 맞은 상대 레이서는 공중으로 떠오르며 튕겨나갑니다.</Bq>
+파동에 맞은 상대 레이서는 공중으로 떠오르며 튕겨나갑니다.<br/><br/>
+OVERDRIVE 패치 이후로 네오의 스킬이 **저스티스** 카트바디로 이식되었습니다.</Bq>
 
 다른 캐릭터들에 비해 비교적 짧은 쿨타임과 생각보다 넓은 범위의 넉백 효과를 줄 수 있어 인기가 많은 캐릭터 중 하나입니다. <br/>
 주로 상대방 앞에서 못가게 막는 플레이가 많은 편이고, 뒤에 있는 상대 위치를 어느정도 파악할 줄 알아야 합니다.  
@@ -24,15 +29,24 @@ date: 2024-06-12
 
 <Info diffText="초보자 추천" titleText="정의의 파동" tagText="액티브"/>
 
-<Bq>자신을 중심으로 상대 레이서의 주행을 방해하는 원형의 파동 생성</Bq>
+<Bq>자신을 중심으로 상대 레이서의 주행을 방해하는 원형의 파동 생성<br/><br/>
+재사용 대기시간 : 13초 (게임시작 시 1회만 6.5초)</Bq>
 
-<TagList title="재사용 대기시간">
+{/* <TagList title="재사용 대기시간">
     <Tag name="일반" text1="13초" text2="6.5초"/>
     <Tag name="고급" text1="12.3초" text2="6.1초"/>
     <Tag name="희귀" text1="11.6초" text2="5.8초"/>
     <Tag name="영웅" text1="10.9초" text2="5.4초"/>
     <Tag name="전설" text1="10.2초" text2="5.1초"/>
-</TagList>
+</TagList> */}
+
+### 카트바디
+
+<Sprite className="kart" backgroundPosition="-1344px -1567px">
+	저스티스
+</Sprite>
+
+스킬을 사용하려면, 저스티스 카트바디를 장착해야합니다.
 
 ### 방어 가능한 아이템
 
@@ -41,14 +55,8 @@ date: 2024-06-12
     <Sprite className="item" backgroundPosition="-87px -13px">천사 아이템</Sprite>
 </Division>
 
-### 방어 캐릭터
-
-오리온 캐릭터는 네오의 스킬을 일정 횟수만큼 방어할 수 있습니다.
-
-<Link className="blank" target="_blank" href="/docs/learn/item/character/orion">오리온 문서 보기</Link> 
-
 ### 카운터
 
-<Division className="mdFlex mdCg">
-    <Tag name="오리온" styleClassName="radius"/>
-</Division>
+프리저 A2 , 인더스틸 카트바디 (기존 오리온 스킬) 는 네오의 스킬을 일정 횟수만큼 방어할 수 있습니다.
+
+<Link className="blank" target="_blank" href="/docs/learn/item/character/orion">오리온 문서 보기</Link> 

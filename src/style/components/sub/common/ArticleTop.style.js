@@ -4,7 +4,7 @@ export const Wrap = styled.div`
     display: flex;
     align-items: center;
     column-gap: 5px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 `
 
 export const Right = styled.div`

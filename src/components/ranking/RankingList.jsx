@@ -1,103 +1,59 @@
 import * as R from 'style/components/ranking/RankingList.style';
 import * as B from 'style/common/Button.style';
 import RankingBoxItem from 'components/ranking/RankingBoxItem';
-import { publicImageSrc } from 'const';
+import RankingBottombar from 'components/ranking/RankingBottombar';
+import { styles, rankingDescriptions } from 'data/ranking';
 
-export default function RankingList ({ 
-    ranking, 
-    rankingFetchNextPage, 
-    rankingHasNextPage, 
-    rankingFetchingNextPage,
-    images,
-    imagesFetchNextPage,
-    imagesIsError
-}) {
+export default function RankingList({ ranking, rankingFetchNextPage, rankingHasNextPage, rankingFetchingNextPage }) {
+	console.log(ranking);
 
-    const styles = {
-        list: {
-            styleType: 'list'
-        },
-        bottom: {
-            styleType: 'bottom'
-        }
-    }
+	return (
+		<R.RankWrap>
+			<R.RankInner>
+				<R.RankDescription>
+					{rankingDescriptions.map((item, index) => (
+						<R.RankDescriptionText key={index}>{item.text}</R.RankDescriptionText>
+					))}
+				</R.RankDescription>
+				<R.RankList scrollHeight="calc(100vh - 410px)">
+					{ranking &&
+						ranking.pages.map(page => {
+							return page.result?.map(result => {
+								const { title, rank, gameRankUpDown, sharesStatus, shares, targetDate, useStoreCount } = result;
 
-    return (
-        <R.RankWrap>
-            <R.BottomBar>
-                {ranking && ranking.pages.map((page, pageIndex) => {
-                    const myGameRank = page.result?.filter((result) => result.title === '카트라이더 드리프트');
+								return (
+									<RankingBoxItem
+										key={rank}
+										styleType={styles.list.styleType}
+										title={title}
+										rank={rank}
+										gameRankUpDown={gameRankUpDown}
+										sharesStatus={sharesStatus}
+										shares={shares}
+										targetDate={targetDate}
+										useStoreCount={useStoreCount}
+										tagAs="li"
+									/>
+								);
+							});
+						})}
+				</R.RankList>
 
-                    return myGameRank?.map((result, resultIndex) => {
-                        const { title, rank, gameRankUpDown, sharesStatus, shares, targetDate, useStoreCount } = result;
+				<RankingBottombar ranking={ranking} styles={styles} tagAs="div" />
 
-                        return (
-                            <RankingBoxItem 
-                                key={rank} 
-                                styleType={styles.bottom.styleType}
-                                title={title} 
-                                rank={rank} 
-                                gameRankUpDown={gameRankUpDown} 
-                                sharesStatus={sharesStatus} 
-                                shares={shares} 
-                                targetDate={targetDate} 
-                                useStoreCount={useStoreCount} 
-                                img={publicImageSrc.static.kartApp} 
-                                tagAs="div" 
-                                imageWidth={50} 
-                                imageHeight={50}
-                                imagesIsError={imagesIsError}
-                            />
-                        )
-                    })
-                })}
-            </R.BottomBar>
-            <R.RankList>
-                {ranking && ranking.pages.map((page, pageIndex) => {
-                    return page.result?.map((result, resultIndex) => {
-                        const { title, rank, gameRankUpDown, sharesStatus, shares, targetDate, useStoreCount } = result;
-
-                        const rankimgImages = images?.pages.map((page) => {
-                            // console.log(page);
-                            return page.images[resultIndex]?.items.map((item) => {
-                                return item.thumbnail;
-                            })
-                        })
-
-                        return (
-                            <RankingBoxItem 
-                                key={rank} 
-                                styleType={styles.list.styleType}
-                                title={title} 
-                                rank={rank} 
-                                gameRankUpDown={gameRankUpDown} 
-                                sharesStatus={sharesStatus} 
-                                shares={shares} 
-                                targetDate={targetDate} 
-                                useStoreCount={useStoreCount} 
-                                img={rankimgImages?.[pageIndex]?.[0]} 
-                                tagAs="strong" 
-                                imageWidth={64} 
-                                imageHeight={64}
-                                imagesIsError={imagesIsError}
-                            />
-                        )
-                    })
-                })}
-            </R.RankList>
-            <R.RankButtonWrap>
-                <B.Button 
-                    type="button" 
-                    typeProp="rank" 
-                    disabled={rankingFetchingNextPage || !rankingHasNextPage ? true : false} 
-                    onClick={() => {
-                        rankingFetchNextPage();
-                        imagesFetchNextPage();
-                    }}
-                >
-                    더보기
-                </B.Button>
-            </R.RankButtonWrap>
-        </R.RankWrap>
-    )
+				<R.RankButtonWrap>
+					<B.Button
+						type="button"
+						typeProp="rank"
+						disabled={rankingFetchingNextPage || !rankingHasNextPage ? true : false}
+						onClick={() => {
+							rankingFetchNextPage();
+						}}
+					>
+						더보기
+					</B.Button>
+				</R.RankButtonWrap>
+			</R.RankInner>
+		</R.RankWrap>
+	);
 }

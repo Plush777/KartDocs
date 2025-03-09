@@ -1,17 +1,17 @@
 import * as R from 'style/components/ranking/RankingList.style';
 
-export default function RankingDataContainer({ styleType, shares, useStoreCount }) {
-    return(
-        <R.RankInnerBox direction="row" type="gameDataContainer">
-            <R.RankInnerBox direction="row" type="gameData">
-                <R.RankText styleType={styleType} styleProp='gameDataTitle'>점유율</R.RankText>
-                <R.RankText styleType={styleType} styleProp='gameData'>{`${shares}%`}</R.RankText>
-            </R.RankInnerBox>
-            
-            <R.RankInnerBox direction="row" type="gameData">
-                <R.RankText styleType={styleType} styleProp='gameDataTitle'>PC방 수</R.RankText>
-                <R.RankText styleType={styleType} styleProp='gameData'>{`${useStoreCount}개`}</R.RankText>
-            </R.RankInnerBox>
-        </R.RankInnerBox>
-    )
+export default function RankingDataContainer({ shares, useStoreCount }) {
+	return (
+		<R.RankItemDataBox>
+			<R.RankItemDataInnerBox>
+				<R.DataTitleText>점유율</R.DataTitleText>
+				<R.DataNumberText>{`${shares}%`}</R.DataNumberText>
+			</R.RankItemDataInnerBox>
+
+			<R.RankItemDataInnerBox>
+				<R.DataTitleText>PC방 수</R.DataTitleText>
+				<R.DataNumberText>{`${useStoreCount}개`}</R.DataNumberText>
+			</R.RankItemDataInnerBox>
+		</R.RankItemDataBox>
+	);
 }

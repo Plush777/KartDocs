@@ -1,294 +1,374 @@
-import styled, { css } from "styled-components";
-import { styles } from "const";
+import styled, { css } from 'styled-components';
 
 export const Item = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 20px;
-    width: 100%;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 20px;
+	width: 100%;
+	height: 100%;
 
-    .top, .bottom {
-        width: 100%;
-        height: 100%;
-    }
-`
+	.top,
+	.bottom {
+		width: 100%;
+		height: 100%;
+	}
+`;
 
 export const Top = styled.div`
-    border-radius: 4px;
-    background-color: var(--background1);
-    transition: background-color .3s ease-in-out;
-`
+	border-radius: 4px;
+	background-color: var(--background1);
+	transition: background-color 0.3s ease-in-out;
+`;
 
-export const Bottom = styled(Top)`
-    
-`
+export const Bottom = styled(Top)``;
 
 /* ------------- Rank Component ------------- */
 
+export const RankWrap = styled.div`
+	position: relative;
+`;
+
 export const Wrap = styled.div`
-    position: relative;
+	position: relative;
 
-    ${props => props.type === 'grid' && css`
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        grid-auto-rows: 240px;
-        column-gap: 20px;
-        row-gap: 80px;
+	${props =>
+		props.type === 'grid' &&
+		css`
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+			grid-auto-rows: 240px;
+			column-gap: 20px;
+			row-gap: 80px;
 
-        .bottom {
-            min-height: 20px;
-            max-height: 40px;
-        }
-    `}
-
-    ${props => props.type === 'ranking' && css`
-        ${css(styles.skeleton.ranking.wrap.properties)}
-    `}
-
-    ${props => props.type === 'card' && css`
-        
-    `}
+			.bottom {
+				min-height: 20px;
+				max-height: 40px;
+			}
+		`}
 `;
 
 export const RankList = styled.div`
-    ${css(styles.skeleton.ranking.list.properties)}
-`
+	display: flex;
+	flex-direction: column;
+	row-gap: 12px;
+`;
 
 export const RankItem = styled.div`
-    ${css(styles.skeleton.ranking.item.properties)}
-    ${css(styles.skeleton.ranking.item.pseudo)}
+	width: calc(100% - 14px);
+	height: 90px;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: var(--background5);
+	column-gap: 12px;
+	transition: 0.3s ease-in-out;
+	transition-property: background-color;
 
-    ${props => props.styleType === 'bottom' && css`
-        height: 70px;
-        padding: 10px 20px;
-    `}
-
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.ranking.item.mobile.laptop)}
+	${({ theme }) => theme.small`
+		align-items: flex-start;
     `};
-`
+`;
 
 export const RankInnerBox = styled.div`
-    ${css(styles.skeleton.ranking.innerBox.properties)}
-    flex-direction: ${props => props.direction};
+	display: flex;
+	flex: 1;
+`;
 
-    ${props => props.direction === 'row' && !props.type && css`
-        flex: 1;
-    `}
+export const RankSeq = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 32px;
+	height: 100%;
+	row-gap: 7px;
+`;
 
-    ${props => props.direction === 'row' && props.type === 'gameDataContainer' && css`
-        min-width: 210px;
-        border-radius: 4px;
-        flex-wrap: wrap;
-        ${css(styles.skeleton.ranking.innerBox.props.type.gameDataContainer)}
-    `}
+export const RankInnerColumnBox = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding-left: 20px;
+	row-gap: 7px;
 
-    ${props => props.direction === 'row' && props.type === 'gameData' && css`
-        height: ${props => props.styleType === 'bottom' ? '15px' : '18px'};
-        column-gap: 5px;
-        background-color: var(--skeleton-background);
-        flex: 1;
-        border-radius: 4px;
-    `}
+	${({ theme }) => theme.laptop`
+		padding-left: 10px;
+	`};
+`;
 
-    ${props => props.direction === 'row' && !props.seq && props.styleType === 'bottom' && !props.type && css`
-        height: 100%;
-    `}
+export const RankInnerRowBox = styled.div`
+	display: flex;
+	align-items: center;
+	min-width: 210px;
+	border-radius: 4px;
+	flex-wrap: wrap;
+	column-gap: 10px;
+	row-gap: 6px;
+`;
 
-    ${props => props.direction === 'column' && props.seq && css`
-        justify-content: space-between;
-        height: ${props => props.styleType === 'bottom' ? '100%' : '64px'};
-    `}
+export const RankDataBox = styled.div`
+	height: 18px;
+	column-gap: 5px;
+	background-color: var(--skeleton-background);
+	flex: 0.2;
+	border-radius: 4px;
 
-    ${props => props.direction === 'column' && !props.seq && css`
-        ${css(styles.skeleton.ranking.innerBox.props.flexDirection.column.noSeq)}
-        flex: 1;
-        height: ${props => props.styleType === 'bottom' ? '100%' : ''};
-        justify-content: space-between;
-        ${css(styles.skeleton.ranking.innerBox.props.styleType.default)}
+	${({ theme }) => theme.tablet`
+		flex: 1;
+    `};
 
-        ${({ theme }) => theme.laptop`
-            padding-left: 10px;
-        `};
-    `}
-`
+	${({ theme }) => theme.small`
+		flex: none;
+		min-width: 46px;
+    `};
+`;
 
 export const RankImgBox = styled.div`
-    width: ${props => props.width};
-    height: ${props => props.height};
-    border-radius: 4px;
-    background-color: var(--skeleton-background);
-`
+	width: ${props => props.width};
+	height: ${props => props.height};
+	border-radius: 4px;
+	background-color: var(--skeleton-background);
+`;
 
 export const RankStatus = styled.div`
-    ${css(styles.skeleton.ranking.status)}
-    width: 32px;
-    height: ${props => props.styleType === 'bottom' ? '14px' : '16px'};
-    border-radius: 4px;
-    background-color: var(--skeleton-background);
-`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: ${props => (props.styleType === 'bottom' ? '14px' : '16px')};
+	border-radius: 4px;
+	background-color: var(--skeleton-background);
+`;
 
-export const RankText = styled.div`
-    ${props => props.styleProp === 'number' && css`
-        max-width: 32px;
-        height: ${props => props.styleType === 'bottom' ? '26px' : '37px'};
-        border-radius: 4px;
-        background-color: var(--skeleton-background);
-    `}
-    
-    ${props => props.styleProp === 'gameName' && css`
-        height: ${props => props.styleType === 'bottom' ? '24px' : '32px'};
-        border-radius: 4px;
-        background-color: var(--skeleton-background);
+export const RankSeqText = styled.div`
+	min-width: inherit;
+	height: 27px;
+	border-radius: 4px;
+	background-color: var(--skeleton-background);
+`;
 
-        ${css(styles.skeleton.ranking.rankText.props.gameName.properties)}
-    `}
+export const BottombarRankNumberText = styled(RankSeqText)`
+	height: 26px;
+`;
 
-    ${({ theme }) => theme.mobile`
-        ${props => props.styleProp === 'gameName' && css`
-            ${css(styles.skeleton.ranking.rankText.props.mobile.mobile.gameName)}
-        `}
+export const RankTitleText = styled.div`
+	max-width: 145px;
+	height: 22px;
+	border-radius: 4px;
+	background-color: var(--skeleton-background);
+	display: flex;
+	align-items: center;
+
+	${({ theme }) => theme.mobile`
+		padding-left: 15px;
+		
     `};
-`
+`;
 
-export const RankBottomBar = styled.div`
-    ${css(styles.skeleton.ranking.BottomBar.properties)}
+export const BottomBar = styled.div`
+	width: calc(100% - 14px);
+	height: 76px;
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+	margin-top: 12px;
+`;
 
-    ${RankItem}{
-        ${css(styles.skeleton.ranking.BottomBar.children.rankBoxItem)}
-    }
-
-    ${({ theme }) => theme.tablet`
-        ${css(styles.skeleton.ranking.BottomBar.mobile.tablet.properties)}
-    `};
-`
+export const BottomBarRankTitleText = styled(RankTitleText)``;
 
 export const RankButtonWrap = styled.div`
-    width: 100%;
-    height: 40px;
-    ${css(styles.skeleton.ranking.ButtonWrap.properties)}
-    border-radius: 4px;
-    background-color: var(--background5);
-`
-/* ------------- //Rank Component ------------- */
+	width: calc(100% - 14px);
+	height: 40px;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	border-radius: 4px;
+	background-color: var(--background5);
+`;
+
+export const BottombarRankSeq = styled(RankSeq)`
+	row-gap: 3px;
+`;
+
+export const BottombarRankSeqText = styled(RankSeqText)``;
+
+export const BottombarRankInnerBox = styled.div`
+	display: flex;
+	height: 100%;
+	flex: 1;
+`;
+
+export const BottombarRankInnerRowBox = styled(RankInnerRowBox)``;
+
+export const BottombarRankInnerColumnBox = styled(RankInnerColumnBox)`
+	row-gap: 3px;
+`;
+
+export const BottombarRankDataBox = styled(RankDataBox)``;
+
+export const BottombarRankItem = styled(RankItem)`
+	padding: 13.5px 20px;
+	height: auto;
+`;
 
 /* ------------- Card Component ------------- */
 
-//MainInner (Main.style.js)
 export const CardInner = styled.div`
-    ${css(styles.skeleton.card.mainInner.properties)}
-    ${css(styles.skeleton.card.mainInner.props.season.properties)}
-
-    ${({ theme }) => theme.tablet`
-        ${css(styles.skeleton.card.mainInner.mobile.tablet.props.season.properties)}
-        ${css(styles.skeleton.card.mainInner.mobile.tablet.props.ranking.properties)}
-    `};
-`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+`;
 
 export const CardHead = styled.div`
-    ${css(styles.skeleton.card.head.properties)}
-    width: 70%;
-    height: 29px;
-    border-radius: 4px;
-    background-color: var(--skeleton);
+	margin-top: 20px;
+	width: 70%;
+	height: 29px;
+	border-radius: 4px;
+	background-color: var(--skeleton);
 
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.card.head.mobile.laptop.properties)}
-    `};
+	${({ theme }) => theme.laptop`
+		height: 27px;
+	`};
 
-    ${({ theme }) => theme.tablet`
-        ${css(styles.skeleton.card.head.mobile.tablet.properties)}
-    `};
-`
+	${({ theme }) => theme.tablet`
+		margin-top: 12px;
+	`};
+`;
 
 export const CardBottom = styled.div`
-    ${css(styles.skeleton.card.bottom.properties)}
-    width: 50%;
-    height: 24px;
-    border-radius: 4px;
-    background-color: var(--skeleton);
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	row-gap: 5px;
+	width: 50%;
+	height: 24px;
+	border-radius: 4px;
+	background-color: var(--skeleton);
 
-    @media screen and (max-width: 1200px) {
-        ${css(styles.skeleton.card.bottom.mobile[1200].properties)}
-    }
+	@media screen and (max-width: 1200px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.card.bottom.mobile.laptop.properties)}
-    `};
-    
+	${({ theme }) => theme.laptop`
+		height: 22px;
+		flex-direction: row;
+		row-gap: 0;
+	`};
 
-    ${({ theme }) => theme.tablet`
-        ${css(styles.skeleton.card.bottom.mobile.tablet.properties)}
-    `};
-`
+	${({ theme }) => theme.tablet`
+		margin-top: 8px;
+	`};
+`;
 
 export const CardGroup = styled.div`
-    ${css(styles.skeleton.card.group.properties)}
-    ${css(styles.skeleton.card.group.adjacent)}
-    display: ${props => props.display};
-    grid-template-columns: ${props => props.gtc};
-    row-gap: ${props => props.rg};
+	display: flex;
+	column-gap: 20px;
+	height: 100%;
+	display: ${props => props.display};
+	grid-template-columns: ${props => props.gtc};
+	row-gap: ${props => props.rg};
 
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.card.group.mobile.laptop.properties)}
-    `};
-`
+	& + & {
+		margin-top: 60px;
+	}
+
+	${({ theme }) => theme.laptop`
+		display: flex;
+		flex-direction: column;
+		row-gap: 40px;
+	`};
+`;
 
 export const CardItem = styled.div`
-    ${css(styles.skeleton.card.item.properties)}
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.card.item.mobile.laptop.properties)}
-    `};
-`
+	${({ theme }) => theme.laptop`
+		flex: none;
+		width: 100%;
+		height: auto;
+	`};
+`;
 
 export const CardThumbnailWrapper = styled.div`
-    ${css(styles.skeleton.card.thumbnailWrapper.properties)}
-`
+	position: relative;
+	display: flex;
+`;
 
 export const CardThumbnail = styled.div`
-    ${css(styles.skeleton.card.thumbnail.properties)}
-`
+	flex: 1;
+	padding-top: 56.19%;
+	border-radius: 8px;
+	background-color: var(--skeleton);
+`;
 
-// Title (Title.style.js)
 export const CardTitleText = styled.div`
-    ${css(styles.skeleton.card.title.titleText.properties)}
-    
-    ${({ theme }) => theme.laptop`
-        ${css(styles.skeleton.card.title.titleText.mobile.laptop.pseudo)}
-    `};
+	position: relative;
+	display: flex;
+	align-items: center;
 
-    ${({ theme }) => theme.tablet`
-         ${css(styles.skeleton.card.title.titleText.mobile.tablet.pseudo)}
-    `};
+	${({ theme }) => theme.laptop`
+		&::before {
+			width: 32px;
+			height: 32px;
+			background-size: 32px;
+		}
+	`};
 
-    ${({ theme }) => theme.mobile`
-        ${css(styles.skeleton.card.title.titleText.mobile.mobile.properties)}
-    `};
-`
+	${({ theme }) => theme.tablet`
+		&::before {
+			width: 26px;
+			height: 26px;
+			background-size: 26px;
+		}
+	`};
+
+	${({ theme }) => theme.mobile`
+		flex-direction: column;
+	`};
+`;
 
 export const CardButtonWrap = styled.div`
-    ${css(styles.skeleton.card.buttons.btnWrap.properties)}
-`
+	position: relative;
+	height: 40px;
+	margin-top: 30px;
+	z-index: 10;
+`;
 
 export const CardButtonArea = styled.div`
-    ${css(styles.skeleton.card.buttons.btnArea.properties)}
-`
+	display: flex;
+	justify-content: center;
+	width: 100%;
+`;
 
 export const CardVideoInfo = styled.div`
-    width: 48px;
+	width: 48px;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	margin: 16px;
+	height: 20px;
+	border-radius: 6px;
+	background-color: var(--skeleton-background);
+	z-index: 100;
 
-    ${css(styles.skeleton.card.videoInfo.infoBox.properties)}
-   
-    ${({ theme }) => theme.tablet`
-        ${css(styles.skeleton.card.videoInfo.infoBox.mobile.tablet.properties)}
-    `};
+	${({ theme }) => theme.tablet`
+		margin: 12px;
+		height: 18px;
+		line-height: 21px;
+		border-radius: 4px;
+		padding: 0 6.5px;
+	`};
 
-    ${({ theme }) => theme.mobile`
-        ${css(styles.skeleton.card.videoInfo.infoBox.mobile.mobile.properties)}
-    `};
-`
-
-/* ------------- //Card Component ------------- */
+	${({ theme }) => theme.mobile`
+		margin: 12px 10px;
+		padding: 0 5px;
+	`};
+`;

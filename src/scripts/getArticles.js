@@ -1,4 +1,4 @@
-import { getAllArticles } from "./getAllArticles";
+import { getAllArticles } from './getAllArticles';
 
 /* 
     useGetArticle로 부터 경로와 파일명을 받아왔기 때문에, getAllArticles 함수에도 받아온 경로를 넘겨줍니다. 
@@ -8,17 +8,17 @@ import { getAllArticles } from "./getAllArticles";
     서로 값이 같은 것만 반환합니다. 
 */
 export async function getArticles(category, dir, lastFileName) {
-    const filePaths = await getAllArticles(category, dir);
-    // console.log(filePaths);
-    const slug = `src/markdown/${category}/${dir}/${lastFileName}`;
-    console.log(slug);  
-     
-    const articleFind = filePaths.find((path) => {
-        // console.log(path.slug);
-        return path.slug === slug;
-    });
+	const filePaths = await getAllArticles(category, dir);
+	// console.log(filePaths);
+	const slug = `src/markdown/${category}/${dir}/${lastFileName}`;
+	// console.log(slug);
 
-    // console.log(articleFind);
+	const articleFind = filePaths.find(path => {
+		// console.log(path.slug);
+		return path.slug === slug;
+	});
 
-    return articleFind.slug;
+	// console.log(articleFind);
+
+	return articleFind.slug;
 }

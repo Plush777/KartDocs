@@ -1,21 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useImageLoad() {
-    const [loaded, setLoaded] = useState(false);
-    const [imageError, setImageError] = useState(false);
+	const [imageErrorMap, setImageErrorMap] = useState({});
 
-    const handleImageError = () => {
-        setImageError(true);
-    };
+	const handleImageError = itemId => {
+		setImageErrorMap(prev => ({
+			...prev,
+			[itemId]: true,
+		}));
+	};
 
-    const loadingComplete = () => {
-        setLoaded(true);
-    }
-
-    return {
-        loaded,
-        imageError,
-        handleImageError,
-        loadingComplete
-    }
+	return { imageErrorMap, handleImageError };
 }

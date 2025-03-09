@@ -3,6 +3,10 @@ title: 우니
 date: 2024-06-12
 ---
 
+<Division className="mdRatio">
+	<Video fileName="skill/skill-uni2.mp4" />
+</Division>
+
 <Sprite className="character" backgroundPosition="-324px -1766px">우니</Sprite>
 
 <Bq>우니가 자신의 레이싱 실력을 증명할 기술을 만들어 선보입니다.
@@ -11,7 +15,8 @@ date: 2024-06-12
 스킬 사용 중에 상대 레이서 1명당 1회만 공격할 수 있습니다.<br/>
 선택한 유저를 스킬로 공격 성공하거나 지속 시간이 끝날 경우 우니 스킬이 종료됩니다.<br/>
 스킬 사용 종료 시 일시적으로 감속합니다.<br/><br/>
-<Link target="_blank" href="https://kartdrift.nexon.com/kartdrift/ko/news/update/view?threadId=2527539">2024/5/30 패치</Link> 이후로 스킬이 추가되었습니다.</Bq>
+<Link target="_blank" href="https://kartdrift.nexon.com/kartdrift/ko/news/update/view?threadId=2527539">2024/5/30 패치</Link> 이후로 스킬이 추가되었습니다.<br/>
+OVERDRIVE 패치 이후로 우니의 스킬이 **무에르토, 무에르토 A2** 카트바디로 이식되었습니다.</Bq>
 
 
 사용 시 조준한 상대를 향해 자신이 정신없이 회전하면서 큰 가속을 받습니다. 가속 메커니즘은 자석과 비슷합니다. <br/>
@@ -38,15 +43,23 @@ date: 2024-06-12
 
 <Bq>선택한 레이서를 향해 회오리를 생성하며 가속함 <br/>
 회오리에 충돌하는 상대 레이서를 1명 당 1회 튕겨냄 <br/>
-스킬이 끝날 때 일시적 감속</Bq>
+스킬이 끝날 때 일시적 감속<br/><br/>재사용 대기시간 : 29초</Bq>
 
-<TagList title="재사용 대기시간">
+{/* <TagList title="재사용 대기시간">
     <Tag name="일반" text1="29초"/>
     <Tag name="고급" text1="27.5초"/>
     <Tag name="희귀" text1="26초"/>
     <Tag name="영웅" text1="24.5초"/>
     <Tag name="전설" text1="23초"/>
-</TagList>
+</TagList> */}
+
+### 카트바디
+
+<Sprite className="kart" backgroundPosition="-3218px -1029px">
+	무에르토, 무에르토 A2
+</Sprite>
+
+스킬을 사용하려면, 무에르토 또는 무에르토 A2 카트바디를 장착해야합니다.
 
 ### 방어 가능한 아이템
 
@@ -58,5 +71,5 @@ date: 2024-06-12
 ### 카운터
 
 <Division className="mdFlex mdCg">
-    <Tag name="꼬마유령" styleClassName="radius"/>
+    <Tag name="안테나 (기존 꼬마유령 캐릭터)" styleClassName="radius"/>
 </Division>

@@ -4,7 +4,6 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@dotlottie/player-component": "^2.7.12",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.3",
@@ -14,10 +13,10 @@
     "@types/mdx": "^2.0.13",
     "axios": "^1.3.4",
     "date-fns": "^2.30.0",
+    "firebase": "^11.0.2",
     "html-dom-parser": "^3.1.3",
     "html-entities": "^2.5.2",
     "loadsh": "^0.0.4",
-    "lottie-light-react": "^2.4.0",
     "next": "^13.4.4",
     "next-mdx-remote": "^4.4.1",
     "react": "^18.2.0",
@@ -28,8 +27,8 @@
     "recoil": "^0.7.7",
     "sass": "^1.57.1",
     "styled-components": "^5.3.6",
-    "swiper": "^8.4.6",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "dev": "next dev -p 4000",
@@ -64,6 +63,7 @@
     "cross-env": "^7.0.3",
     "css-mangle-webpack-plugin": "^1.0.0-alpha2",
     "file-loader": "^6.2.0",
-    "next-pwa": "^5.6.0"
+    "next-pwa": "^5.6.0",
+    "prettier": "^3.3.3"
   }
 }

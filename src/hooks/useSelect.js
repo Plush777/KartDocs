@@ -1,24 +1,18 @@
 'use client';
 
 import { useState } from 'react';
- 
-export default function useSelect () {
-    const [toggle, setToggle] = useState(false);
-    const [selected, setSelected] = useState(undefined);
 
-    const handleSelectClick = (key, e) => {
-        setSelected(prev => {
-            return {
-                ...prev,
-                [key]: e.target.textContent
-            }
-        });
-        setToggle(false);
-    };
+export default function useSelect(initialValue) {
+	const [toggle, setToggle] = useState(false);
+	const [selectedValue, setSelectedValue] = useState(initialValue);
 
-    const handleToggleSelect = () => {
-        setToggle(!toggle);
-    };
+	const handleSelectClick = () => {
+		setToggle(false);
+	};
 
-    return [toggle, setToggle, handleSelectClick, handleToggleSelect];
+	const handleToggleSelect = () => {
+		setToggle(!toggle);
+	};
+
+	return [toggle, setToggle, selectedValue, setSelectedValue, handleSelectClick, handleToggleSelect];
 }
