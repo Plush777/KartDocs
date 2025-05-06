@@ -62,7 +62,6 @@
 		"@next/bundle-analyzer": "^14.2.0",
 		"@svgr/webpack": "^8.1.0",
 		"cross-env": "^7.0.3",
-		"css-mangle-webpack-plugin": "^1.0.0-alpha2",
 		"file-loader": "^6.2.0",
 		"prettier": "^3.3.3"
 	}
