@@ -1,4 +1,3 @@
-import Pwa from 'components/pwa/Pwa';
 import * as H from 'style/layout/Header.style';
 import * as U from 'style/components/header/Util.style';
 import * as T from 'style/components/header/Tooltip.style';
@@ -40,7 +39,6 @@ export default function HeaderRight({ handleSettingButton }) {
 						);
 					})}
 			</U.UtilArea>
-			<Pwa />
 		</H.Right>
 	);
 }

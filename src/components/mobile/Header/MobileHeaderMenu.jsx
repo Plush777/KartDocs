@@ -2,7 +2,6 @@ import useBodyScrollLock from 'hooks/useBodyScrollLock';
 import { utilRender, utilArray, utilLinks, mobileHeaderMenuTagCondition } from 'data/header';
 import { menus } from 'data/gnb';
 import SCopen from 'svg/ico-open.svg';
-import Pwa from 'components/pwa/Pwa';
 import * as H from 'style/layout/Header.style';
 import useClickAlert from 'hooks/useClickAlert';
 import useMenuActive from 'hooks/useMenuActive';
@@ -42,7 +41,6 @@ export default function MobileHeaderMenu({ menuToggle, handleSettingButton }) {
 										: null
 								}
 							>
-								{item === '앱 설치하기' ? <Pwa /> : item}
 								{linkIndex && <SCopen width="20px" height="20px" />}
 							</H.mobileHeaderMenuLink>
 						</H.mobileHeaderMenuItem>

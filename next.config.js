@@ -12,7 +12,6 @@ const nextConfig = {
 		styledComponents: true,
 	},
 
-	output: 'standalone',
 	pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 	// 도메인 모두 허용 https://stackoverflow.com/questions/71235874/how-to-allow-all-domains-for-image-nextjs-config
 	images: {
@@ -49,13 +48,5 @@ const nextConfig = {
 	},
 };
 
-//https://medium.com/readytowork-org/implementing-pwa-in-the-next-13-application-3e46f6b3f6d8
-const withPWA = require('next-pwa')({
-	dest: 'public',
-	disable: process.env.NODE_ENV === 'development',
-	register: true,
-	skipWaiting: true,
-});
-
 const withMDX = require('@next/mdx')({});
-module.exports = withBundleAnalyzer(withPWA(withMDX(nextConfig)));
+module.exports = withBundleAnalyzer(withMDX(nextConfig));
