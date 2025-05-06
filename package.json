@@ -1,0 +1,69 @@
+{
+  "name": "kartrider-tips",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.3",
+    "@tanstack/react-query": "^5.36.0",
+    "@tanstack/react-query-devtools": "^5.29.0",
+    "@tanstack/react-query-next-experimental": "^5.29.0",
+    "@types/mdx": "^2.0.13",
+    "axios": "^1.3.4",
+    "date-fns": "^2.30.0",
+    "firebase": "^11.0.2",
+    "html-dom-parser": "^3.1.3",
+    "html-entities": "^2.5.2",
+    "loadsh": "^0.0.4",
+    "next": "^13.4.4",
+    "next-mdx-remote": "^4.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-ga4": "^2.1.0",
+    "react-is": "^18.2.0",
+    "react-responsive": "^9.0.2",
+    "recoil": "^0.7.7",
+    "sass": "^1.57.1",
+    "styled-components": "^5.3.6",
+    "web-vitals": "^2.1.0",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "dev": "next dev -p 4000",
+    "build": "next build",
+    "build:dev": "env-cmd -f .env.development next build",
+    "start": "next start -p 4000",
+    "start:dev": "env-cmd -f .env.development next start -p 4000",
+    "lint": "eslint --ext .js --ignore-path .gitignore .",
+    "analyze": "cross-env ANALYZE=true next build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.0",
+    "@svgr/webpack": "^8.1.0",
+    "cross-env": "^7.0.3",
+    "css-mangle-webpack-plugin": "^1.0.0-alpha2",
+    "file-loader": "^6.2.0",
+    "next-pwa": "^5.6.0",
+    "prettier": "^3.3.3"
+  }
+}

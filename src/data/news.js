@@ -1,0 +1,1 @@
+export const tabArray = ['뉴스', '개발자 노트', '업데이트'];

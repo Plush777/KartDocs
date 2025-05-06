@@ -1,0 +1,394 @@
+---
+title: 렉 안걸리게 하는 설정법이 있나요?
+---
+
+<Img className="staticImage" src="/images/ingame/img-settings-for-not-getting-lag.png" alt="세팅 이미지"/>
+
+기본값으로 진행해도 되지만, 렉이 걸리거나 반응속도가 느린거 같다면 아래 설정법을 따라해보세요.
+
+### 프레임 속도 제한
+
+게임 내에서 프레임 속도 제한을 설정할 수 있습니다.
+
+프레임이 낮으면 입력한 키가 씹힐 수도 있기 때문에 무제한으로 설정합니다.
+
+### 그래픽
+
+#### 윈드 부스터
+
+부스터의 바람 효과를 담당하는 옵션입니다.
+
+<br/>
+
+※ 성능 향상이 목적인 경우, 보통으로 설정하는 것이 좋습니다.
+
+#### 수직 동기화 (Vertical Syncronization)
+
+수직 동기화 옵션이 false일경우 화면이 물결치는 현상 (깨지는 현상) 이 발생할 수 있으므로, 
+
+저사양이어도 true로 설정하는 것이 좋습니다.
+
+<details>
+    <summary>수직 동기화 상세설명</summary>
+
+    
+    줄여서 V-Sync 라고 부르며, 단어 그대로 <Link href="#vsnyc">수직 방향으로 동기화</Link> 해줌을 의미합니다.
+
+    <br/>
+
+    <Division className="mdFlex mdCg">
+        <Figure figcaption="수직동기화 켬">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911183615_mopvuezn.gif" alt="수직동기화 켬 예시 이미지"/>
+        </Figure>
+
+        <Figure figcaption="수직동기화 끔">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911183615_ygbqbhnr.gif" alt="수직동기화 끔 예시 이미지"/>
+        </Figure>
+    </Division>
+
+    <br/>
+
+    해당 기능의 차이는 위와 같습니다. 
+
+    수직 동기화를 끈 상태에서는 화면이 위에서 아래로 혹은 아래에서 위로 물결치는 듯한 현상이 발생합니다.
+
+    이러한 현상은 사람에 따라 불쾌감을 줄 수도 있습니다.
+
+    <br/>
+
+    수직 동기화는 화면을 물결 및 <Link href="#tearing">테어링</Link> 없이 부드럽게 보기 위해 사용한다라고 볼 수 있습니다.
+
+    <Division className="hasIdDiv" id="vsync">
+        ##### 수직방향으로 동기화를 한다는게 무슨 말이에요?
+    </Division>
+
+    <Division className="mdFlex">
+        <Figure figcaption="그래픽 카드 렌더링 방식">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911184918_bsmnohbm.gif" alt="그래픽 카드 렌더링 방식 예시 이미지"/>
+        </Figure>
+    </Division>
+
+    <br/>
+
+    그래픽 카드는 위 이미지처럼 렌더링 시, 위에서 아래 방향으로 차근차근 그려나가게 됩니다. 
+
+    <br/>
+
+    **수직 동기화를 한다** 는 것은 쉽게 말해 완성된 그림만 보여주는 것입니다.
+
+    이는 크게 두가지 방식이 있습니다.
+
+    <br/>
+
+    1. 그림을 다 그릴때까지 기다린다 - 수직동기화
+    2. 이미 그려진 그림을 가져온다 - 삼중버퍼링 or 빠르게 (페스트 싱크)
+
+    <Division className="hasIdDiv" id="tearing">
+        ##### 테어링 (Tearing)
+    </Division>
+
+    <br/>
+
+    <Division className="mdFlex">
+        <Figure figcaption="예시) GTA5">
+            <Img className="staticImage" src="https://photo.coolenjoy.co.kr/data/editor/1609/thumb-Bimg_20160911192833_tmhauhwk.png" alt="GTA 예시"/>
+        </Figure>
+    </Division>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911193129_bydorgwz.png" alt="테어링 예시 이미지"/>
+
+    <br/>
+
+    테어링이란 (잡아)뜯는, 쥐어뜯는 와 같은 의미로 
+
+    아직 다 완성되지 않은 그림 + 이미 다 그렸던 그림 두가지가 합쳐져서
+
+    저 두 경계면 사이에 이질감이 발생하게 되는데, 해당 현상을 "테어링 (Tearing)" 이라고 합니다.
+
+    <br/>
+
+    즉, 수직 동기화를 키게 되면 위 현상을 방지할 수 있습니다.
+
+    <Division className="hasIdDiv" id="triple">
+        ##### 삼중 버퍼링 (V-Sync with Triple Buffering)
+    </Division>
+
+    <br/>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/thumb-Bimg_20160911220410_lumrprii.png" alt="삼중 버퍼링 예시 이미지"/>
+
+    <br/>
+
+    기존 수직 동기화 방식에는 단점이 있습니다. 
+
+    <br/>
+
+    연산할게 너무 많아서 렉이 걸리는 것으로, 
+
+    게임에서 옵션을 너무 많이 준 나머지 렉이 생기면 프레임이 반토막이 나버리는 문제가 발생합니다.
+
+    <br/>
+
+    <Division className="mdFlex mdCg">
+        <Figure figcaption="정상적인 화면">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911183615_mopvuezn.gif" alt="정상적인 화면 예시 이미지"/>
+        </Figure>
+
+        <Figure figcaption="프레임이 반토막 나버린 화면">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911220641_fpgsenob.gif" alt="프레임이 반토막 나버린 화면 예시 이미지"/>
+        </Figure>
+    </Division>
+
+    <br/>
+
+    반토막 나도 테어링 없이 나오면 되는게 아닌가? 라고 생각할 수 있겠지만,
+
+    위 예시 이미지를 보면 생각보다 프레임 차이가 심한 것을 볼 수 있습니다.
+
+    <br/>
+
+    해당 문제 때문에 새롭게 나온 기술이 **삼중 버퍼링 (V-Sync with Triple Buffering)** 이라는 기술입니다.
+
+    <br/>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911225247_drxyhmwm.png" alt="트리플 버퍼 예시 이미지"/>
+
+    기존의 더블 버퍼링 방식 (Fronter Buffer + Back Buffer) 에서 하나가 더 추가된 방식으로, 
+
+    급격히 부하가 발생하는 상황에도 프레임 차이가 심하지 않게 만들어줍니다.
+
+    <br/><br/>
+
+    <Division className="mdFlex mdCg">
+        <Figure figcaption="수직동기화 일반">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911234028_lszmelbo.gif" alt="수직동기화 일반 예시 이미지"/>
+        </Figure>
+
+        <Figure figcaption="수직동기화 삼중버퍼링">
+            <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/20160911234029_rahgmugw.gif" alt="수직동기화 삼중버퍼링 예시 이미지"/>
+        </Figure>
+    </Division>
+
+    <br/>
+
+    결과를 보면, 확실히 삼중버퍼링을 사용한 쪽이 더 부드럽게 보이는 것을 확인할 수 있습니다.
+
+    (gif 방식의 한계로 좀 덜 부드러워보이지만, 실제로는 위 이미지보다 조금 더 부드럽다고 합니다.)
+
+    <Division className="hasIdDiv" id="fastsync">
+        ##### 빠르게 동기화* (Fast Sync)
+    </Division>
+
+    <br/>
+
+    빠르게 동기화 (Fast Sync) 란 이름처럼 날쌘 수직동기화입니다.
+
+    <br/>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/thumb-Bimg_20160912015933_kvuabhof.png" alt="Fast Sync 예시 이미지"/>
+
+    <br/>
+
+    삼중 버퍼링 방식처럼 버퍼를 3개 사용한다는 것은 동일하지만, 다른점이 있습니다.
+
+    Fast Sync 라는 이름 답게 쉴 새 없이 렌더링을 진행합니다.
+
+    <br/>
+
+    프론트 버퍼는, A와 B중에 완성된 그림 (Rendered) 을 가져다가 쓰고,
+
+    둘다 완성되있으면 가장 최근에 완성된 그림을 가져다 씁니다.
+
+    <br/>
+
+    즉, 삼중 버퍼링 방식보다 **인풋렉이 절감** 되는 효과가 있습니다.
+
+    <br/>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/thumb-Bimg_20160912021128_mtohdlbo.png" alt="Fast Sync 로드율이 높아질 때 예시 이미지"/>
+
+    <br/>
+
+    부하 (로드율) 가 높아져도 테어링이 발생하지 않습니다.
+
+    <br/><br/>
+
+    <Img className="staticImage wAuto" src="https://photo.coolenjoy.co.kr/data/editor/1609/thumb-Bimg_20160912021331_apkvuqpd.jpg" alt="Fast Sync 성능 그래프 이미지"/>
+
+    위 차트처럼, '수직동기화 해제'와 큰 차이가 없고, '수직동기화 사용'보다 훨씬 빠른 반응속도. 
+
+    즉, 훨씬 절감된 인풋렉을 보여주게 됩니다.
+
+    <br/>
+
+    단, 어쩔 수 없는 단점으로는 쉴 새 없이 렌더링을 진행하기 때문에 그래픽카드가 항상 최대 출력으로 동작하게 되며,
+
+    그 결과 소모 전력 상승 및 발열량 증가로 이어집니다. (이 점은 수직동기화 해제와 차이가 없음)
+
+    또한, 새로운 방식의 매커니즘 도입 및 개발된지 얼마 되지 않아 아직 완벽하게 호환되는 게임이 적습니다.
+
+    상당수의 게임이 60프레임이 오버되는 경우 스터터링 (프레임 드랍) 이 발생합니다.
+
+    <br/><br/><br/>
+
+    ##### 정리
+
+    <br/>
+
+    **수직동기화 미사용 시** 
+
+    <br/>
+
+    장점 : 인풋렉이 현저히 적다.
+    
+    단점 : 테어링 (화면 찢어짐) 발생 (멀미 우려) , 전기소모 최대치 및 높은 발열량
+
+    <br/>
+
+    **수직동기화 사용시** 
+
+    <br/>
+
+    장점 : 부드러운 화면
+    
+    단점 : 프레임 드랍 (30프레임으로 급감), 과부하 상태에서 최대 효율 발휘 불가능, 약간의 인풋렉 발생
+
+    <br/>
+
+    **삼중버퍼링 수직동기화 사용시** 
+
+    <br/>
+
+    장점 : 부드러운 화면, 프레임 드랍시에도 최대한 부드럽게 유지되는 화면, 과부하 상태에서 최대 효율 발휘 가능, 테어링 완벽 제거
+    
+    단점 : 약간의 마이크로 스터터링 (프레임 드랍) 발생할 수 있음, 엄청난 인풋렉
+
+    <br/>
+
+    **빠르게 동기화 사용시** 
+
+    <br/>
+
+    장점 : 부드러운 화면, 프레임 드랍시에도 최대한 부드럽게 유지되는 화면, 과부하 상태에서 최대 효율 발휘 가능, 테어링 완벽 제거
+    
+    단점 : 호환성 문제로 다수의 게임에 스터터링 (프레임 드랍) 발생
+
+    <Bq>원본 글: <Link href="https://coolenjoy.net/bbs/37/123538?sfl=wr_subject&stx=%EC%88%98%EC%A7%81" target="_blank">https://coolenjoy.net/bbs/37/123538?sfl=wr_subject&stx=%EC%88%98%EC%A7%81</Link></Bq>
+</details>
+
+#### 텍스쳐 필터링
+
+수치가 낮을수록 멀리있는 텍스쳐를 뭉개지는 방식으로 표현하여 렉을 줄입니다.
+
+#### 모델 디테일 
+
+불필요한 오브젝트를 제거함으로써 렉을 줄입니다.
+
+#### 캐릭터 품질
+
+게임 플레이 중의 캐릭터 품질을 결정합니다. 
+
+품질이 낮을수록 캐릭터의 선명도를 떨어뜨리고, 그림자같은 성능 향상에 불필요한 효과들을 최소화 합니다.
+
+#### 해상도 배율
+
+수치가 낮을수록 전체적인 화면의 선명도를 떨어뜨립니다.
+
+<br/>
+
+※ 해당 옵션은 수치가 낮으면 게임 플레이에 방해가 되기 때문에 기본 값이 가장 좋습니다.
+
+#### 안티 앨리어싱
+
+게임 내의 테두리 (모서리) 를 부드럽게 표현합니다. 
+
+<br/>
+
+※ 성능 향상이 목적인 경우, TAA로 설정하는 것이 좋습니다.
+
+#### 그림자 거리
+
+그림자 거리 옵션이 false 인경우 거리가 멀어질수록 트랙 오브젝트의 그림자를 표현하지 않습니다.
+
+<br/>
+
+※ 성능 향상이 목적인 경우, false로 설정하는 것이 좋습니다.
+
+#### 포스트 프로세스
+
+게임 내의 후처리 효과를 설정합니다.
+ex) 뽀샤시 효과, 왜곡 효과등 카메라 후보정앱에서 제공하는 것들
+
+<br/>
+
+※ 저사양 환경인경우 해당 옵션을 false로 설정하는 것이 좋습니다.
+
+#### 모션 블러
+
+게임 플레이 시 움직임에 따른 흐림 효과를 결정합니다.
+
+<br/>
+
+※ 성능 향상이 목적인 경우, false로 설정하는 것이 좋습니다.
+
+#### 화면공간반사
+
+게임 내의 물체들이 반사되는 효과를 결정합니다.
+
+<br/>
+
+실시간 반사가 아닌 맵에 미리 촬영해둔 고정된 이미지를 반사처럼 보이게 주로 매끈한 부위 (금속등)에 투영하는 것으로,
+
+있고 없고의 차이는 크지만 성능에 영향을 미치는 정도는 크지 않습니다.
+
+<br/>
+
+※ 정말 저사양 환경이 아니라면 true로 설정해도 무방합니다.
+
+#### 플레이너 리플렉션
+
+차고에서 사용되는 반사 설정입니다.
+
+실시간 반사에 가까운 반사를 보여줍니다. 어떤 동작에 의해 물건이 새로 생겨도 반사를 시켜줍니다. 
+
+<br/>
+
+※ 촬영을 위한 옵션으로, 차고 외 실제 게임에서는 적용되지 않기 때문에 true로 설정해도 무방합니다.
+
+####  SSAO
+
+그림자가 생기는 부분들의 그림자를 어두운 곳은 더 어둡게 표현해서 입체감을 살려줍니다.
+
+※ 성능에 크게 영향을 미치지 않으므로, 원하는대로 설정하시면 됩니다.
+
+#### 볼류메트릭 포그
+
+대기원근법을 안개로 표현하는 설정입니다.
+
+먼곳일수록 안개가 짙어보이며, 성능 향상이 목적인 경우 false로 설정하는 것이 좋습니다.
+
+#### 폴리지 밀도
+
+식물이나 나무와 같은 요소들이 얼마나 조밀하게 배치되는지를 나타내는 설정입니다. 
+
+폴리지 시스템은 대규모 오픈 월드 게임에서 나무, 풀, 꽃, 바위 등과 같은 자연 요소들을 효과적으로 배치하고 관리하는 데 사용됩니다. 
+
+해당 옵션이 false 일경우 자연 요소들이 더 적게 배치됩니다.
+
+<br/>
+
+※ 성능 향상이 목적인 경우, false로 설정하는 것이 좋습니다.
+
+#### NVIDIA Reflex
+
+게임에서 지연 시간을 줄이고 더 반응성 있는 게임플레이 경험을 제공하는 NVIDIA의 기술입니다. 
+
+<br/>
+
+Reflex는 주로 경쟁 게임에서 중요한 역할을 하며, 
+
+시스템 지연 시간을 최소화하여 플레이어가 더 빠르고 정확하게 반응할 수 있도록 도와줍니다.
+
+- Reflex + boost (추천): 드리프트 끌림현상이 심함, 빠른 반응속도
+- Reflex: 드리프트 끌림현상이 심하지는 않음, 적당한 반응속도
+- Disable: 드리프트 끌림현상이 거의 없음, 느린 반응속도

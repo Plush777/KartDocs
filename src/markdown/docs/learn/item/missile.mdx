@@ -1,0 +1,61 @@
+---
+title: 미사일
+date: 2024-06-11
+---
+
+<Division className="mdRatio">
+	<Video fileName="item/item_balloon_missile02.mp4" />
+</Division>
+
+<Sprite className="item" backgroundPosition="-88px -166px">미사일 아이템</Sprite>
+
+<Bq>상대 레이서 중 한 명을 선택해 미사일을 발사합니다. <br/>
+미사일에 맞으면 잠시 조작이 불가능해집니다.</Bq>
+
+컨트롤 (ctrl) 키를 눌러 미사일을 조준하여 1명에게 발사할 수 있으며, <br/>
+미사일 조준에 실패할 경우 아이템이 소멸됩니다.
+<br/>
+
+풍선을 장착하고 있는 경우 100% 확률로 공중에 뜨는 대신, 바나나 피격과 같은 효과를 받습니다. <br/>
+미끄러지게되면 감속이 생각보다 심하기 때문에 코너 직전이나 가속이 필요한 지름길 앞에 써서 <br/>
+지름길을 못가게 방해할 수도 있습니다.
+
+<Division className="mdTip">
+    <Paragraph className="mdTipText">레일 타고있는 도중 혹은 피격당했을 때 상대가 다오 스킬을 쓰게되면 감속이 되지않으니 주의 해야합니다.</Paragraph>
+</Division>
+
+### 관련 기술
+
+#### 벽미
+
+미사일을 벽에 통과시켜 쏘는 것으로, 조준점이 빨갛게 됐을 때 쏘면 벽이든 장애물이든 통과하는 특성을 이용한 기술입니다.
+
+<Division className="mdRatio">
+	<Video fileName="item/item_Wall_rocket.mp4" />
+</Division>
+
+
+#### 빽미 
+
+뒤로 미사일을 쏜다는 뜻으로 미사일 아이템을 가지고 있으나 앞 순위가 전부 우리 팀인 상황, 혹은 1등인 상황일 때
+
+차체를 돌려 뒷순위에 있는 상대한테 미사일 공격을 하는 기술입니다.
+
+<Division className="mdRatio">
+	<Video fileName="item/item_Back_rocket.mp4" />
+</Division>
+
+### 방어 가능한 아이템
+
+<Division className="mdFlex mdCg">
+    <Sprite className="item" backgroundPosition="-244px -165px">실드 아이템</Sprite>
+    <Sprite className="item" backgroundPosition="-87px -13px">천사 아이템</Sprite>
+</Division>
+
+### 관련 용어
+
+- 미살 : 미사일의 줄임말.
+- 1미 / 2미 : 상대 1등 또는 2등에게 미사일 공격을 한다는 의미.
+- 삑났어요 : 미사일 조준에 실패했다는 의미.
+- 떴어요 : 상대방이 미사일에 맞아서 공중에 떴다는 의미. <br/>원작에서는 풍선을 장착해도 확률에 따라 공중에 뜨거나 미끄러지거나 했었으나,<br/>
+드리프트로 넘어오면서 확률이 100%로 바뀌어 사실상 쓸 일이 별로 없는 용어.
