@@ -2,10 +2,6 @@ import Article from 'components/article/Article';
 import { getAllArticles } from 'scripts/getAllArticles';
 import useTranslateTitle from 'hooks/useTranslateTitle';
 import { meta } from 'const';
-<<<<<<< HEAD
-=======
-//
->>>>>>> 428ead0c0153f0068cbc82f0c3c7dac6488852a5
 
 export async function generateMetadata({ params }) {
 	const article = params.article;

@@ -28,13 +28,9 @@ export default function MainLayout() {
 				queryKey: ['newsLists'],
 				queryFn: async () => {
 					const news = await fetchNews();
-<<<<<<< HEAD
+
 					const devArticles = await fetchArticles('https://kartrider-tips-api.fly.dev/api/article/dev');
 					const updateArticles = await fetchArticles('https://kartrider-tips-api.fly.dev/api/article/update');
-=======
-					const devArticles = await fetchArticles('http://localhost:8000/api/article/dev');
-					const updateArticles = await fetchArticles('http://localhost:8000/api/article/update');
->>>>>>> 428ead0c0153f0068cbc82f0c3c7dac6488852a5
 
 					return {
 						news,
