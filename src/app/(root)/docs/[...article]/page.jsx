@@ -1,6 +1,7 @@
 import Article from 'components/article/Article';
-import { getAllMdxPaths } from 'scripts/getAllMdxPaths';
 import useTranslateTitle from 'hooks/useTranslateTitle';
+import { glob } from 'glob';
+import path from 'path';
 import { meta } from 'const';
 
 export async function generateMetadata({ params }) {
@@ -28,13 +29,13 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-	const articles = await getAllMdxPaths();
+	const paths = await glob('src/markdown/**/*.mdx');
 
-	const slugs = articles.map(article => ({
-		article: article.slug,
-	}));
-
-	return slugs;
+	return paths.map(fullPath => {
+		const relative = fullPath.replace('src/markdown/', '').replace(/\.mdx$/, '');
+		const slug = relative.split(path.sep);
+		return { slug };
+	});
 }
 
 export default async function page({ params }) {

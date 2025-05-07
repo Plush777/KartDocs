@@ -3,16 +3,29 @@ import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MdxContent } from 'app/mdx-content';
 import { format } from 'date-fns';
+import { notFound } from 'next/navigation';
 
 export default async function Article({ slug }) {
 	const category = slug[0] === 'learn' || slug[0] === 'faq' || slug[0] === 'encyclopedia' ? 'docs' : 'guide';
-	const filePath = path.join(process.cwd(), 'src/markdown', category, ...slug) + '.mdx';
+
+	// 먼저 기본 경로 시도
+	let filePath = path.join(process.cwd(), 'src/markdown', category, ...slug) + '.mdx';
+
+	// 존재하지 않으면 index.mdx fallback
+	if (!fs.existsSync(filePath)) {
+		filePath = path.join(process.cwd(), 'src/markdown', category, ...slug, 'index.mdx');
+
+		if (!fs.existsSync(filePath)) {
+			notFound(); // 404 페이지로 처리
+		}
+	}
+
+	// 존재하는 경로에서만 읽기
 	const fileContent = fs.readFileSync(filePath, 'utf8');
 
 	const mdx = await serialize(fileContent, {
 		parseFrontmatter: true,
 	});
-
 	const { frontmatter } = mdx;
 
 	const formatDate = dateString => {

@@ -1,10 +1,7 @@
 import Article from 'components/article/Article';
-import { getAllArticles } from 'scripts/getAllMdxPaths';
 import useTranslateTitle from 'hooks/useTranslateTitle';
 import { meta } from 'const';
 
-import fs from 'fs';
-import path from 'path';
 import glob from 'fast-glob';
 
 export async function generateMetadata({ params }) {
@@ -12,7 +9,7 @@ export async function generateMetadata({ params }) {
 	const fileName = article[article.length - 1];
 	const title = useTranslateTitle(fileName);
 
-	if (article.includes('purpose') || article.includes('contribute')) {
+	if (article.includes('purpose') || article.includes('contribute') || article.includes('donate')) {
 		return {
 			title: `${meta.title} | ${title}`,
 		};
@@ -20,19 +17,16 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-	// 모든 index.mdx 파일 경로를 가져옵니다.
-	const paths = await glob(['src/markdown/**/index.mdx']);
+	// 모든 mdx 파일을 가져옵니다 (index.mdx 포함, 일반 파일도 포함)
+	const paths = await glob('src/markdown/**/*.mdx');
 
 	return paths.map(fullPath => {
-		// 'src/markdown/' 이후부터 추출하고, 'index.mdx' 제거
 		const relative = fullPath
-			.replace(/\\/g, '/') // 윈도우에서도 슬래시 일관성 유지
+			.replace(/\\/g, '/') // 윈도우 호환
 			.replace('src/markdown/', '')
-			.replace('/index.mdx', '');
+			.replace(/\.mdx$/, '');
 
-		// 슬러그 배열로 변환 (예: ['guide', 'contribute'])
 		const slug = relative.split('/');
-
 		return { slug };
 	});
 }

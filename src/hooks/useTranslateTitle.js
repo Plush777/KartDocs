@@ -198,6 +198,7 @@ export default function useTranslateTitle(fileName) {
 
 	if (fileName === 'purpose') return '사이트 안내';
 	if (fileName === 'contribute') return '기여하기';
+	if (fileName === 'donate') return '후원하기';
 
 	return undefined;
 }
