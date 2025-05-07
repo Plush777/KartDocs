@@ -6,17 +6,19 @@ import { format } from 'date-fns';
 import { notFound } from 'next/navigation';
 
 export default async function Article({ slug }) {
-	const category = slug[0] === 'learn' || slug[0] === 'faq' || slug[0] === 'encyclopedia' ? 'docs' : 'guide';
+	const category = ['learn', 'faq', 'encyclopedia'].includes(slug[0]) ? 'docs' : 'guide';
+
 	let filePath = path.join(process.cwd(), 'src/markdown', category, ...slug) + '.mdx';
-	const fileContent = fs.readFileSync(filePath, 'utf8');
 
 	if (!fs.existsSync(filePath)) {
-		// index.mdx fallback
-		filePath = path.join(process.cwd(), 'src/markdown', ...slug, 'index.mdx');
-		if (!fs.existsSync(filePath)) {
-			notFound(); // 404 페이지
+		const indexPath = path.join(process.cwd(), 'src/markdown', category, ...slug, 'index.mdx');
+		if (!fs.existsSync(indexPath)) {
+			notFound(); // 파일이 없으면 404
 		}
+		filePath = indexPath;
 	}
+
+	const fileContent = fs.readFileSync(filePath, 'utf8');
 
 	const mdx = await serialize(fileContent, {
 		parseFrontmatter: true,
@@ -24,6 +26,7 @@ export default async function Article({ slug }) {
 
 	const { frontmatter } = mdx;
 
+	// 날짜 포맷
 	const formatDate = dateString => {
 		if (!dateString) return null;
 		const date = new Date(dateString);

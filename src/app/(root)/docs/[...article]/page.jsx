@@ -4,6 +4,8 @@ import { glob } from 'glob';
 import path from 'path';
 import { meta } from 'const';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }) {
 	const article = params.article;
 	const fileName = article[article.length - 1];
