@@ -1,5 +1,5 @@
 import Article from 'components/article/Article';
-import { getAllArticles } from 'scripts/getAllArticles';
+import { getAllMdxPaths } from 'scripts/getAllMdxPaths';
 import useTranslateTitle from 'hooks/useTranslateTitle';
 import { meta } from 'const';
 
@@ -28,10 +28,10 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-	const articles = await getAllArticles();
+	const articles = await getAllMdxPaths();
 
 	const slugs = articles.map(article => ({
-		slug: article.slug,
+		article: article.slug,
 	}));
 
 	return slugs;

@@ -1,28 +1,36 @@
-import useGetArticle from 'hooks/useGetArticle';
-import { format } from 'date-fns';
+import fs from 'fs';
+import path from 'path';
+import { serialize } from 'next-mdx-remote/serialize';
 import { MdxContent } from 'app/mdx-content';
+import { format } from 'date-fns';
 
 export default async function Article({ slug }) {
-	const { serialized, frontmatter } = await useGetArticle(slug);
+	const category = slug[0] === 'learn' || slug[0] === 'faq' || slug[0] === 'encyclopedia' ? 'docs' : 'guide';
+	const filePath = path.join(process.cwd(), 'src/markdown', category, ...slug) + '.mdx';
+	const fileContent = fs.readFileSync(filePath, 'utf8');
+
+	const mdx = await serialize(fileContent, {
+		parseFrontmatter: true,
+	});
+
+	const { frontmatter } = mdx;
 
 	const formatDate = dateString => {
 		if (!dateString) return null;
-
 		const date = new Date(dateString);
-
 		return {
 			formatted: format(date, 'yyyy년 MM월 dd일'),
-			dateTime: date.toISOString(), // ISO 표준 형식으로 변환
+			dateTime: date.toISOString(),
 		};
 	};
 
-	const formattedDate = frontmatter.date ? formatDate(frontmatter.date) : null;
-	const formattedLastUpdated = frontmatter.lastUpdated ? formatDate(frontmatter.lastUpdated) : null;
+	const formattedDate = formatDate(frontmatter.date);
+	const formattedLastUpdated = formatDate(frontmatter.lastUpdated);
 
 	return (
 		<>
 			<h2>{frontmatter.title}</h2>
-			<MdxContent source={serialized} />
+			<MdxContent source={mdx} />
 
 			{formattedDate && (
 				<div className="articleDate">

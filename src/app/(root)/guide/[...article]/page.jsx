@@ -1,7 +1,11 @@
 import Article from 'components/article/Article';
-import { getAllArticles } from 'scripts/getAllArticles';
+import { getAllArticles } from 'scripts/getAllMdxPaths';
 import useTranslateTitle from 'hooks/useTranslateTitle';
 import { meta } from 'const';
+
+import fs from 'fs';
+import path from 'path';
+import glob from 'fast-glob';
 
 export async function generateMetadata({ params }) {
 	const article = params.article;
@@ -16,13 +20,21 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-	const articles = await getAllArticles();
+	// 모든 index.mdx 파일 경로를 가져옵니다.
+	const paths = await glob(['src/markdown/**/index.mdx']);
 
-	const slugs = articles.map(article => ({
-		slug: article.slug,
-	}));
+	return paths.map(fullPath => {
+		// 'src/markdown/' 이후부터 추출하고, 'index.mdx' 제거
+		const relative = fullPath
+			.replace(/\\/g, '/') // 윈도우에서도 슬래시 일관성 유지
+			.replace('src/markdown/', '')
+			.replace('/index.mdx', '');
 
-	return slugs;
+		// 슬러그 배열로 변환 (예: ['guide', 'contribute'])
+		const slug = relative.split('/');
+
+		return { slug };
+	});
 }
 
 export default async function page({ params }) {

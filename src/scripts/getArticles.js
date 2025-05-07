@@ -1,4 +1,4 @@
-import { getAllArticles } from './getAllArticles';
+import { getAllArticles } from './getAllMdxPaths';
 
 /* 
     useGetArticle로 부터 경로와 파일명을 받아왔기 때문에, getAllArticles 함수에도 받아온 경로를 넘겨줍니다. 
